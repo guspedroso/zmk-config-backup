@@ -7,66 +7,155 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/ext_power.h>
+
+#define SYM_LAY 1
+#define NUM_LAY 2
+#define OUT_LAY 3
+#define NAV_LAY 4
+#define BTH_LAY 5
+
+// TODO try NAV $mt (&mo NAV_LAY) f
+// TODO try BTH $mt (&mo BTH_LAY) j
 
 / {
         keymap {
                 compatible = "zmk,keymap";
 
                 default_layer {
-// -----------------------------------------------------------------------------------------
-// |  Q  |  W  |  E  |  R  |  T   |   |  Y  |  U   |  I  |  O  |  P  |
-// |  A  |  S  |  D  |  F  |  G   |   |  H  |  J   |  K  |  L  |  ;  |
-// |  Z  |  X  |  C  |  V  |  B   |   |  N  |  M   |  ,  |  .  |  /  |
-//             | GUI | NAV | SHFT |   | SPC | SYM  | ALT |
+// ,-----------------------------.   ,-----------------------------.
+// |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  ;  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
+//             | OUT | SYM | SPC |   | ENT | NUM | OUT |
+//             `-----------------'   `-----------------'
+// Holding
+// ,-----------------------------.   ,-----------------------------.
+// |     |     |     |     |     |   |     |     |     |     |     |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// |SHIFT| ALT | GUI |     |     |   |     |     | GUI | CTRL|SHIFT|
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// |     |     |     |     |     |   |     |     |     |     |     |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
+//             |     |     |     |   |     |     |     |
+//             `-----------------'   `-----------------'
                         bindings = <
-   &kp Q &kp W &kp E &kp R &kp T   &kp Y &kp U  &kp I     &kp O   &kp P
-   &kp A &kp S &kp D &kp F &kp G   &kp H &kp J  &kp K     &kp L   &kp SEMI
-   &kp Z &kp X &kp C &kp V &kp B   &kp N &kp M  &kp COMMA &kp DOT &kp FSLH
-          &kp LGUI &mo 1 &kp LSHFT &kp SPACE &mo 2 &kp RALT
-                        >;
-                };
-                nav_layer {
-// -----------------------------------------------------------------------------------------
-// |BTCLR|     | ESC |  ~   |     |   | TAB | HOME |  UP  | END | DEL  |
-// | BT1 | GUI | ALT | CTRL | NUM |   |  /  | LEFT | DOWN | RGT | BKSP |
-// | BT2 |     |     |      |     |   |  \  | ENT  |      |     |      |
-//             |     |      |     |   |     |      |      |
-                        bindings = <
-   &bt BT_CLR   &trans      &kp ESC  &kp TILDE &trans     &kp TAB  &kp HOME &kp UP   &kp END   &kp DEL
-   &bt BT_SEL 0 &kp K_CMENU &kp RALT &kp LCTRL &mo 3      &kp FSLH &kp LEFT &kp DOWN &kp RIGHT &kp BSPC
-   &bt BT_SEL 1 &trans      &trans   &trans    &trans     &kp BSLH &kp RET  &trans   &trans    &trans
-                            &trans   &trans    &trans     &trans   &trans   &trans
+   &kp Q        &kp W      &kp E       &kp R       &kp T        &kp Y     &kp U       &kp I       &kp O       &kp P
+   &mt LSHIFT A &mt LALT S &mt LGUI D  &kp F       &kp G        &kp H     &kp J       &mt RGUI K  &mt RCTRL L &mt RSHIFT SEMI
+   &kp Z        &kp X      &kp C       &kp V       &kp B        &kp N     &kp M       &kp COMMA   &kp DOT     &kp FSLH
+                           &mo OUT_LAY &mo SYM_LAY &kp SPACE    &kp ENTER &mo NUM_LAY &mo OUT_LAY
                         >;
                 };
 
                 sym_layer {
-// -----------------------------------------------------------------------------------------
+// ,-----------------------------.   ,-----------------------------.
+// |  ~  |     |     |     |     |   |     |  _  |  +  |  {  |  }  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
 // |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |
-// |     |     |     |     |     |   |  -  |  =  |  {  |  }  | "|" |
-// |     |     |     |     |     |   |  _  |  +  |  [  |  ]  |  \  |
-//             | GUI |     | SPC |   | ENT |     | ALT |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// |     |     |     |     |     |   |     | NEXT| VOL-| VOL+| PLAY|
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
+//             |     |     |     |   |     |     |     |
+//             `-----------------'   `-----------------'
                         bindings = <
-   &kp EXCL  &kp AT    &kp HASH  &kp DLLR  &kp PRCNT   &kp CARET &kp AMPS  &kp KP_MULTIPLY &kp LPAR &kp RPAR
-   &trans    &trans    &trans    &trans    &trans      &kp MINUS &kp EQUAL &kp LBKT        &kp RBKT &kp PIPE
-   &trans    &trans    &trans    &trans    &trans      &trans    &trans    &trans          &trans   &kp BSLH
-                       &kp LGUI  &trans    &kp SPACE   &kp RET   &trans    &kp RALT
+   &kp TILDE &trans &trans   &trans   &trans       &trans    &kp UNDER  &kp KP_PLUS     &kp LBRC     &kp RBRC
+   &kp EXCL  &kp AT &kp HASH &kp DLLR &kp PRCNT    &kp CARET &kp AMPS   &kp KP_MULTIPLY &kp LPAR     &kp RPAR
+   &trans    &trans &trans   &trans   &trans       &trans    &kp C_NEXT &kp C_VOL_UP    &kp C_VOL_DN &kp C_PLAY_PAUSE
+                    &trans   &trans   &trans       &trans    &trans     &trans
                         >;
                 };
 
-// This layer is unreachable until "tri layer state" is sorted out.
-// Leaving it here for completeness.
                 num_layer {
-// -----------------------------------------------------------------------------------------
-// |     |     |     |     |     |   |  A  |  7  |  8  |  9  |  D  |
-// |     |     |     |     |     |   |  B  |  4  |  5  |  6  |  E  |
-// |     |     |     |     |     |   |  C  |  1  |  2  |  3  |  F  |
-//             |     |     |     |   |  0  |  .  |     |
+// ,-----------------------------.   ,-----------------------------.
+// |  `  |     |     |     |     |   |     |  -  |  =  |  [  |  ]  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// |     |     |     |     |     |   |     |     |BRIG-|BRIG+|SLEEP|
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
+//             |     |     |     |   |     |     |     |
+//             `-----------------'   `-----------------'
                         bindings = <
-   &trans &trans &trans &trans &trans    &kp A  &kp N7  &kp N8 &kp N9 &kp D
-   &trans &trans &trans &trans &trans    &kp B  &kp N4  &kp N5 &kp N6 &kp E
-   &trans &trans &trans &trans &trans    &kp C  &kp N1  &kp N2 &kp N3 &kp F
-                 &trans &trans &trans    &kp N0 &kp DOT &trans
+   &kp GRAVE &trans &trans &trans &trans    &trans &kp KP_MINUS &kp KP_EQUAL  &kp LBKT      &kp RBKT
+   &kp N1    &kp N2 &kp N3 &kp N4 &kp N5    &kp N6 &kp N7       &kp N8        &kp N9        &kp N0
+   &trans    &trans &trans &trans &trans    &trans &trans       &kp C_BRI_DEC &kp C_BRI_INC &kp C_SLEEP
+                    &trans &trans &trans    &trans &trans       &trans
                         >;
                 };
+
+                out_layer {
+// ,-----------------------------.   ,-----------------------------.
+// | ESC |     |     |     |RESET|   |BT CL|     |  UP |     | BSPC|
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// | TAB |     |     |     |BOOTL|   |BT NX| LEFT| DOWN| RGT |  '  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// | CAPS|     |     |     |PWR -|   |PWR -|     |     |     |  \  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
+//             |     |     |PWR +|   |PWR +|     |     |
+//             `-----------------'   `-----------------'
+                        bindings = <
+   &kp ESC  &trans &trans &trans &reset               &bt BT_CLR        &trans   &kp UP   &trans    &kp BSPC
+   &kp TAB  &trans &trans &trans &bootloader          &bt BT_NXT        &kp LEFT &kp DOWN &kp RIGHT &kp APOS
+   &kp CAPS &trans &trans &trans &ext_power EP_OFF    &ext_power EP_OFF &trans   &trans   &trans    &kp BSLH
+                   &trans &trans &ext_power EP_ON     &ext_power EP_ON  &trans   &trans
+                        >;
+                };
+
+                nav_layer {
+// ,-----------------------------.   ,-----------------------------.
+// |     |     |     |     |     |   |     |     |  UP |     | BSPC|
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// |     |     |     |     |     |   |     | LEFT| DOWN| RGT |  '  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// |     |     |     |     |     |   |     |     |     |     |  \  |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
+//             |     |     |     |   |     |     |     |
+//             `-----------------'   `-----------------'
+                        bindings = <
+   &trans &trans &trans &trans &trans    &trans &trans   &kp UP   &trans    &kp BSPC
+   &trans &trans &trans &trans &trans    &trans &kp LEFT &kp DOWN &kp RIGHT &kp APOS
+   &trans &trans &trans &trans &trans    &trans &trans   &trans   &trans    &kp BSLH
+                 &trans &trans &trans    &trans &trans   &trans
+                        >;
+                };
+
+                bth_layer {
+// ,-----------------------------.   ,-----------------------------.
+// | ESC |     |     |     |     |   |     |     |     |     |     |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// | TAB |     |     |     |     |   |     |     |     |     |     |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// | CAPS|     |     |     |     |   |     |     |     |     |     |
+// |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
+//             |     |     |     |   |     |     |     |
+//             `-----------------'   `-----------------'
+                        bindings = <
+   &kp ESC  &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+   &kp TAB  &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+   &kp CAPS &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+                   &trans &trans &trans    &trans &trans &trans
+                        >;
+                };
+
+//                 template_layer {
+// // ,-----------------------------.   ,-----------------------------.
+// // |     |     |     |     |     |   |     |     |     |     |     |
+// // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// // |     |     |     |     |     |   |     |     |     |     |     |
+// // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
+// // |     |     |     |     |     |   |     |     |     |     |     |
+// // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
+// //             |     |     |     |   |     |     |     |
+// //             `-----------------'   `-----------------'
+//                         bindings = <
+//    &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+//    &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+//    &trans &trans &trans &trans &trans    &trans &trans &trans &trans &trans
+//                  &trans &trans &trans    &trans &trans &trans
+//                         >;
+//                 };
         };
 };
