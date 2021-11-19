@@ -88,19 +88,19 @@
 
                 out_layer {
 // ,-----------------------------.   ,-----------------------------.
-// | ESC |     |     |     |RESET|   |BT CL|     |  UP |     | BSPC|
+// | ESC |     |     |     |RESET|   |RESET|     |  UP |     | BSPC|
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// | TAB |     |     |     |BOOTL|   |BT NX| LEFT| DOWN| RGT |  '  |
+// | TAB |     |     |     |BOOTL|   |BOOTL| LEFT| DOWN| RGT |  '  |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// | CAPS|     |     |     |PWR -|   |PWR -|     |     |     |  \  |
+// | CAPS|     |     |     |PWR -|   |PWR -|BT NX|BT CL|     |  \  |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
 //             |     |     |PWR +|   |PWR +|     |     |
 //             `-----------------'   `-----------------'
                         bindings = <
-   &kp ESC  &trans &trans &trans &reset               &bt BT_CLR        &trans   &kp UP   &trans    &kp BSPC
-   &kp TAB  &trans &trans &trans &bootloader          &bt BT_NXT        &kp LEFT &kp DOWN &kp RIGHT &kp APOS
-   &kp CAPS &trans &trans &trans &ext_power EP_OFF    &ext_power EP_OFF &trans   &trans   &trans    &kp BSLH
-                   &trans &trans &ext_power EP_ON     &ext_power EP_ON  &trans   &trans
+   &kp ESC  &trans &trans &trans &reset               &reset            &trans     &kp UP     &trans    &kp BSPC
+   &kp TAB  &trans &trans &trans &bootloader          &bootloader       &kp LEFT   &kp DOWN   &kp RIGHT &kp APOS
+   &kp CAPS &trans &trans &trans &ext_power EP_OFF    &ext_power EP_OFF &bt BT_NXT &bt BT_CLR &trans    &kp BSLH
+                   &trans &trans &ext_power EP_ON     &ext_power EP_ON  &trans     &trans
                         >;
                 };
 
