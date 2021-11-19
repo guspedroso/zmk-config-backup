@@ -74,33 +74,33 @@
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
 // |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// |     |     |     |     |     |   |     |     |BRIG-|BRIG+|SLEEP|
+// |SLEEP|BRIG-|BRIG+|     |     |   |     |     |     |     |     |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
 //             |     |     |     |   |     |     |     |
 //             `-----------------'   `-----------------'
                         bindings = <
-   &kp GRAVE &trans &trans &trans &trans    &trans &kp KP_MINUS &kp KP_EQUAL  &kp LBKT      &kp RBKT
-   &kp N1    &kp N2 &kp N3 &kp N4 &kp N5    &kp N6 &kp N7       &kp N8        &kp N9        &kp N0
-   &trans    &trans &trans &trans &trans    &trans &trans       &kp C_BRI_DEC &kp C_BRI_INC &kp C_SLEEP
-                    &trans &trans &trans    &trans &trans       &trans
+   &kp GRAVE   &trans         &trans        &trans &trans    &trans &kp KP_MINUS &kp KP_EQUAL  &kp LBKT      &kp RBKT
+   &kp N1      &kp N2         &kp N3        &kp N4 &kp N5    &kp N6 &kp N7       &kp N8        &kp N9        &kp N0
+   &kp C_SLEEP &kp C_BRI_DEC  &kp C_BRI_INC &trans &trans    &trans &trans       &trans        &trans        &trans
+                              &trans        &trans &trans    &trans &trans       &trans
                         >;
                 };
 
                 out_layer {
 // ,-----------------------------.   ,-----------------------------.
-// | ESC |     |     |     |RESET|   |RESET|     |  UP |     | BSPC|
+// | ESC |     |     |     |RESET|   |BT PR|     |  UP |     | BSPC|
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// | TAB |     |     |     |BOOTL|   |BOOTL| LEFT| DOWN|RIGHT|  '  |
+// | TAB |     |     |     |BOOTL|   |BT NX| LEFT| DOWN|RIGHT|  '  |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// | CAPS|     |     |     |PWR -|   |PWR -|BT PR|BT NX|BT CL|  \  |
+// | CAPS|     |     |     |     |   |BT CL|     |     |     |  \  |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
-//             |     |     |PWR +|   |PWR +|     |     |
+//             |     |     |     |   |     |     |     |
 //             `-----------------'   `-----------------'
                         bindings = <
-   &kp ESC  &trans &trans &trans &reset               &reset            &trans     &kp UP     &trans    &kp BSPC
-   &kp TAB  &trans &trans &trans &bootloader          &bootloader       &kp LEFT   &kp DOWN   &kp RIGHT &kp APOS
-   &kp CAPS &trans &trans &trans &ext_power EP_OFF    &ext_power EP_OFF &bt BT_PRV &bt BT_NXT &bt BT_CLR    &kp BSLH
-                   &trans &trans &ext_power EP_ON     &ext_power EP_ON  &trans     &trans
+   &kp ESC  &trans &trans &trans &reset         &bt BT_PRV &trans   &kp UP   &trans    &kp BSPC
+   &kp TAB  &trans &trans &trans &bootloader    &bt BT_NXT &kp LEFT &kp DOWN &kp RIGHT &kp APOS
+   &kp CAPS &trans &trans &trans &trans         &bt BT_CLR &trans   &trans   &trans    &kp BSLH
+                   &trans &trans &trans         &trans     &trans   &trans
                         >;
                 };
 
