@@ -7,16 +7,12 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/ext_power.h>
 
 #define SYM_LAY 1
 #define NUM_LAY 2
 #define OUT_LAY 3
 #define NAV_LAY 4
 #define BTH_LAY 5
-
-// TODO try NAV $mt (&mo NAV_LAY) f
-// TODO try BTH $mt (&mo BTH_LAY) j
 
 / {
         keymap {
@@ -36,7 +32,7 @@
 // ,-----------------------------.   ,-----------------------------.
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// |SHIFT| ALT | GUI |     |     |   |     |     | GUI | CTRL|SHIFT|
+// |SHIFT| ALT | GUI | NAV |     |   |     | BTH | GUI | CTRL|SHIFT|
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
 // |     |     |     |     |     |   |     |     |     |     |     |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
@@ -44,7 +40,7 @@
 //             `-----------------'   `-----------------'
                         bindings = <
    &kp Q        &kp W      &kp E       &kp R       &kp T        &kp Y     &kp U       &kp I       &kp O       &kp P
-   &mt LSHIFT A &mt LALT S &mt LGUI D  &kp F       &kp G        &kp H     &kp J       &mt RGUI K  &mt RCTRL L &mt RSHIFT SEMI
+   &mt LSHIFT A &mt LALT S &mt LGUI D  &lt NAV_LAY F   &kp G        &kp H     &lt BTH_LAY J   &mt RGUI K  &mt RCTRL L &mt RSHIFT SEMI
    &kp Z        &kp X      &kp C       &kp V       &kp B        &kp N     &kp M       &kp COMMA   &kp DOT     &kp FSLH
                            &mo OUT_LAY &mo SYM_LAY &kp SPACE    &kp ENTER &mo NUM_LAY &mo OUT_LAY
                         >;
