@@ -83,37 +83,37 @@
 
                 nav_layer {
 // ,-----------------------------.   ,-----------------------------.
-// |     |     |     |     |     |   |BTH 0|     |  UP |     | BSPC|
+// | ESC |     |     |     |RESET|   |BTH 0|     |  UP |     | BSPC|
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// |     |     |     |     |     |   |BTH 1| LEFT| DOWN|RIGHT|  '  |
+// | TAB |     |     |     |BOOTL|   |BTH 1| LEFT| DOWN|RIGHT|  '  |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// |     |     |     |     |     |   |BT CL|     |     |     |  \  |
+// | CAPS|     |     |     |     |   |BT CL|     |     |     |  \  |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
 //             |     |     |     |   |     |     |     |
 //             `-----------------'   `-----------------'
                         bindings = <
-   &trans &trans &trans &trans &trans    &bt BT_SEL 0 &trans   &kp UP   &trans    &kp BSPC
-   &trans &trans &trans &trans &trans    &bt BT_SEL 1 &kp LEFT &kp DOWN &kp RIGHT &kp APOS
-   &trans &trans &trans &trans &trans    &bt BT_CLR   &trans   &trans   &trans    &kp BSLH
-                 &trans &trans &trans    &trans       &trans   &trans
+   &kp ESC  &trans &trans &trans &reset         &bt BT_SEL 0 &trans   &kp UP   &trans    &kp BSPC
+   &kp TAB  &trans &trans &trans &bootloader    &bt BT_SEL 1 &kp LEFT &kp DOWN &kp RIGHT &kp APOS
+   &kp CAPS &trans &trans &trans &trans         &bt BT_CLR   &trans   &trans   &trans    &kp BSLH
+                   &trans &trans &trans         &trans       &trans   &trans
                         >;
                 };
 
                 bth_layer {
 // ,-----------------------------.   ,-----------------------------.
-// | ESC |     |     |     |RESET|   |     |     |     |     |     |
+// | ESC |     |     |     |RESET|   |BTH 0|     |     |     | BSPC|
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// | TAB |     |     |     |BOOTL|   |     |     |     |     |     |
+// | TAB |     |     |     |BOOTL|   |BTH 1|     |     |     |  '  |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----|
-// | CAPS|     |     |     |     |   |     |     |     |     |     |
+// | CAPS|     |     |     |     |   |BT CL|     |     |     |  \  |
 // |-----+-----+-----+-----+-----|   |-----+-----+-----+-----+-----'
 //             |     |     |     |   |     |     |     |
 //             `-----------------'   `-----------------'
                         bindings = <
-   &kp ESC  &trans &trans &trans &reset         &trans &trans &trans &trans &trans
-   &kp TAB  &trans &trans &trans &bootloader    &trans &trans &trans &trans &trans
-   &kp CAPS &trans &trans &trans &trans         &trans &trans &trans &trans &trans
-                   &trans &trans &trans         &trans &trans &trans
+   &kp ESC  &trans &trans &trans &reset         &bt BT_SEL 0 &trans &trans &trans &kp BSPC
+   &kp TAB  &trans &trans &trans &bootloader    &bt BT_SEL 1 &trans &trans &trans &kp APOS
+   &kp CAPS &trans &trans &trans &trans         &bt BT_CLR   &trans &trans &trans &kp BSLH
+                   &trans &trans &trans         &trans       &trans &trans
                         >;
                 };
         };
