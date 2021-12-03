@@ -14,6 +14,17 @@
 #define BTH_LAY 4
 
 / {
+        behaviors {
+                hm: homerow_mods {
+                compatible = "zmk,behavior-hold-tap";
+                label = "HOMEROW_MODS";
+                #binding-cells = <2>;
+                tapping-term-ms = <150>;
+                quick_tap_ms = <0>;
+                flavor = "tap-preferred";
+                bindings = <&kp>, <&kp>;
+                };
+        };
         keymap {
                 compatible = "zmk,keymap";
 
@@ -38,10 +49,10 @@
 //             |     |     |     |   |     |     |     |
 //             `-----------------'   `-----------------'
                         bindings = <
-   &kp Q            &kp W          &kp E          &kp R         &kp T        &kp Y     &kp U         &kp I          &kp O           &kp P
-   &th_tap LSHIFT A &th_tap LALT S &th_tap LGUI D &lt NAV_LAY F &kp G        &kp H     &lt BTH_LAY J &th_tap RGUI K &th_tap RCTRL L &th_tap RSHIFT SEMI
-   &kp Z            &kp X          &kp C          &kp V         &kp B        &kp N     &kp M         &kp COMMA      &kp DOT         &kp FSLH
-                                   &kp C_SLEEP    &mo SYM_LAY   &kp SPACE    &kp ENTER &mo NUM_LAY   &kp RC(GRAVE)
+   &kp Q        &kp W      &kp E       &kp R         &kp T        &kp Y     &kp U         &kp I         &kp O       &kp P
+   &hm LSHIFT A &hm LALT S &hm LGUI D  &lt NAV_LAY F &kp G        &kp H     &lt BTH_LAY J &hm RGUI K    &hm RCTRL L &hm RSHIFT SEMI
+   &kp Z        &kp X      &kp C       &kp V         &kp B        &kp N     &kp M         &kp COMMA     &kp DOT     &kp FSLH
+                           &kp C_SLEEP &mo SYM_LAY   &kp SPACE    &kp ENTER &mo NUM_LAY   &kp RC(GRAVE)
                         >;
                 };
 
